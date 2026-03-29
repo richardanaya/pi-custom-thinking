@@ -4,20 +4,30 @@ A pi extension that lets you customize the "Thinking..." loading messages with f
 
 ## Installation
 
-1. Clone or copy this extension to your pi extensions directory:
-   ```bash
-   # Option 1: Clone into global extensions
-   git clone <repo-url> ~/.pi/extensions/pi-custom-thinking
+### Option 1: Install via npm (recommended)
 
-   # Option 2: Clone anywhere and add to your session's package.json
-   cd ~/workbench/pi-custom-thinking
-   # Then add the path to your project's package.json pi.extensions array
-   ```
+```bash
+pi install npm:pi-custom-thinking
+```
 
-2. Reload pi to load the extension:
-   ```
-   /reload
-   ```
+### Option 2: Install from git
+
+```bash
+pi install git:github.com/richardanaya/pi-custom-thinking
+```
+
+### Option 3: Local development
+
+Clone or copy this extension to your pi extensions directory:
+```bash
+# Clone into global extensions
+git clone <repo-url> ~/.pi/extensions/pi-custom-thinking
+```
+
+Then reload pi to load the extension:
+```
+/reload
+```
 
 ## Configuration
 
