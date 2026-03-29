@@ -1,0 +1,15 @@
+{
+  "currentStyle": "philosopher",
+  "styles": {
+    "my-custom": {
+      "name": "My Personal Style",
+      "messages": [
+        "Pondering existence...",
+        "Consulting the void...",
+        "Aligning chakras...",
+        "Downloading more RAM...",
+        "Calculating answer to everything..."
+      ]
+    }
+  }
+}
