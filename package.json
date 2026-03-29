@@ -6,8 +6,23 @@
   "author": "Richard Anaya",
   "type": "module",
   "main": "index.ts",
+  "types": "index.ts",
+  "files": [
+    "index.ts",
+    "README.md",
+    "custom-thinking.example.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardanaya/pi-custom-thinking.git"
+  },
+  "bugs": {
+    "url": "https://github.com/richardanaya/pi-custom-thinking/issues"
+  },
+  "homepage": "https://github.com/richardanaya/pi-custom-thinking#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "echo 'Ready to publish'"
   },
   "pi": {
     "extensions": [
@@ -16,12 +31,18 @@
   },
   "dependencies": {},
   "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [
     "pi-extension",
+    "pi",
     "cli",
     "tui",
     "thinking",
     "loading",
-    "fun"
+    "fun",
+    "terminal",
+    "ai"
   ]
 }

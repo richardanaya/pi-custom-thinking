@@ -1,0 +1,47 @@
+# Source control
+.git/
+.gitignore
+.gitattributes
+
+# CI/GitHub
+.github/
+
+# Documentation (already in README)
+docs/
+
+# Examples (already documented in README)
+custom-thinking.example.json
+
+# Test files
+test/
+tests/
+*.test.ts
+*.spec.ts
+__tests__/
+
+# Development configs
+.eslintrc*
+.prettierrc*
+tsconfig.json
+tsconfig.*.json
+jest.config.*
+vitest.config.*
+
+# Editor configs
+.vscode/
+.idea/
+.editorconfig
+
+# CI configs
+.github/
+.travis.yml
+.circleci/
+
+# Other
+*.md
+!README.md
+CONTRIBUTING.md
+CHANGELOG.md
+LICENSE
+*.log
+*.tgz
