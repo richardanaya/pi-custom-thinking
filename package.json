@@ -1,6 +1,6 @@
 {
   "name": "pi-custom-thinking",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A pi extension to customize the \"Thinking...\" loading messages with fun styles",
   "license": "MIT",
   "author": "Richard Anaya",

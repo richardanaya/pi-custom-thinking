@@ -54,6 +54,7 @@ Create a `~/.custom-thinking.json` file to customize your thinking messages:
 
 - `currentStyle`: The default style to use (built-in or custom)
 - `styles`: Define your own custom styles (merged with built-in styles)
+- `hiddenLabel` (per style): The label shown when thinking blocks are collapsed (Ctrl+T)
 
 ## Built-in Styles
 
@@ -71,7 +72,9 @@ Create a `~/.custom-thinking.json` file to customize your thinking messages:
 
 ## How It Works
 
-The extension hooks into pi's `agent_start` and `turn_start` events to set a custom working message via the `setWorkingMessage` UI API. The message rotates randomly each time the AI starts processing, never showing the same message twice in a row.
+The extension hooks into pi's `session_start`, `agent_start`, and `turn_start` events to:
+- Set a custom working message via `setWorkingMessage` — rotates randomly each time the AI starts processing, never showing the same message twice in a row.
+- Set a custom hidden-thinking label via `setHiddenThinkingLabel` — shown when thinking blocks are collapsed with Ctrl+T.
 
 ## Creating Custom Styles
 

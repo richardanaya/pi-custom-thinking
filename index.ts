@@ -14,6 +14,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Working...",
       "Computing...",
     ],
+    hiddenLabel: "Working...",
   },
   creative: {
     name: "Creative",
@@ -27,6 +28,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Sculpting a response...",
       "Arranging pixels of wisdom...",
     ],
+    hiddenLabel: "Imagining...",
   },
   tech: {
     name: "Tech Jargon",
@@ -40,6 +42,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Running forward pass...",
       "Synchronizing tensors...",
     ],
+    hiddenLabel: "Inferencing...",
   },
   zen: {
     name: "Zen",
@@ -53,6 +56,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Seeking clarity...",
       "Observing thoughts...",
     ],
+    hiddenLabel: "Contemplating...",
   },
   pirate: {
     name: "Pirate",
@@ -66,6 +70,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Scrubbing the deck...",
       "Charting a course...",
     ],
+    hiddenLabel: "Schemin'...",
   },
   chef: {
     name: "Chef",
@@ -79,6 +84,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Tasting for balance...",
       "Garnishing the answer...",
     ],
+    hiddenLabel: "Reducing...",
   },
   wizard: {
     name: "Wizard",
@@ -92,6 +98,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Waving the wand...",
       "Deciphering ancient texts...",
     ],
+    hiddenLabel: "Divining...",
   },
   space: {
     name: "Space",
@@ -105,6 +112,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Docking with knowledge base...",
       "Houston, we have an idea...",
     ],
+    hiddenLabel: "Scanning...",
   },
   philosopher: {
     name: "Philosopher",
@@ -120,6 +128,7 @@ const DEFAULT_STYLES: ThinkingStyles = {
       "Inquiring within...",
       "Balancing the golden mean...",
     ],
+    hiddenLabel: "Reasoning...",
   },
 };
 
@@ -127,6 +136,8 @@ const DEFAULT_STYLES: ThinkingStyles = {
 interface ThinkingStyle {
   name: string;
   messages: string[];
+  /** Label shown for collapsed thinking blocks */
+  hiddenLabel?: string;
 }
 
 interface ThinkingStyles {
@@ -197,17 +208,30 @@ async function loadConfig(): Promise<void> {
   }
 }
 
+function applyStyle(style: ThinkingStyle, ctx: any) {
+  if (!ctx.hasUI) return;
+  if (style.hiddenLabel) {
+    ctx.ui.setHiddenThinkingLabel(style.hiddenLabel);
+  }
+}
+
 export default async function (pi: ExtensionAPI) {
   configPath = join(homedir(), ".custom-thinking.json");
   await loadConfig();
 
-  // Set custom working message when agent starts
+  // Set hidden thinking label when session starts
+  pi.on("session_start", async (_event, ctx) => {
+    applyStyle(getCurrentStyle(), ctx);
+  });
+
+  // Also re-apply on agent start in case UI state was reset
   pi.on("agent_start", async (_event, ctx) => {
     if (!ctx.hasUI) return;
 
     const style = getCurrentStyle();
-    const message = getNextMessage(style);
+    applyStyle(style, ctx);
 
+    const message = getNextMessage(style);
     // Set the working message with keyboard shortcut hint
     // The UI will append " (Ctrl+C to interrupt)" automatically
     ctx.ui.setWorkingMessage(message);
@@ -218,6 +242,8 @@ export default async function (pi: ExtensionAPI) {
     if (!ctx.hasUI) return;
 
     const style = getCurrentStyle();
+    applyStyle(style, ctx);
+
     const message = getNextMessage(style);
     ctx.ui.setWorkingMessage(message);
   });
